@@ -20,8 +20,10 @@ module PragmaticSegmenter
       end
     end
 
+    # segment is the basic command run after PragmaticSegmenter.new(whatever)
     def segment
       return [] unless @text
+      # processor is a class inside PragmaticSegmenter's root
       processor.new(language: @language_module).process(text: @text)
     end
 
