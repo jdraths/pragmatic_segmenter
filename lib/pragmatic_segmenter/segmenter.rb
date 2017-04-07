@@ -24,6 +24,7 @@ module PragmaticSegmenter
     def segment
       return [] unless @text
       # processor is a class inside PragmaticSegmenter's root
+      ## probably enabled as a module of Langauge:: because PragmaticSegmenter::Languages includes require 'pragmatic_segmenter/processor'
       processor.new(language: @language_module).process(text: @text)
     end
 
