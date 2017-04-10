@@ -13,6 +13,7 @@ module PragmaticSegmenter
     end
 
     def replace
+      # PossessiveAbbreviationRule (and a bunch of other random rules) is defined in numbers.rb
       @text.apply(@language::PossessiveAbbreviationRule,
         @language::KommanditgesellschaftRule,
         @language::SingleLetterAbbreviationRules::All)
