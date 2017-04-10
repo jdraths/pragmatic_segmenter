@@ -16,7 +16,10 @@ module PragmaticSegmenter
       @language = language
     end
 
+    # .process is run immediately after processor.new inside of the .segment command
     def process(text:)
+      # List searches for a list within a string and adds newlines before each list item.
+      # see PragmaticSegmenter::List for more...
       @text = List.new(text: text).add_line_break
       replace_abbreviations
       replace_numbers
