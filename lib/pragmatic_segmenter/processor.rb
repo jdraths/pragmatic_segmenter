@@ -36,6 +36,8 @@ module PragmaticSegmenter
 
     def split_into_segments
       # the order we check these segments would be critical
+      # most of the segmentations replace a pattern with a strange series of symbols...
+      ## then the symbols are replaced back with punctiation in SubSymbolsRules
       check_for_parens_between_quotes(@text).split("\r")
          .map! { |segment| segment.apply(@language::SingleNewLineRule, @language::EllipsisRules::All) }
          .map { |segment| check_for_punctuation(segment) }.flatten
