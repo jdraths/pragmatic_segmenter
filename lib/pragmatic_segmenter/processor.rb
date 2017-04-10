@@ -96,6 +96,7 @@ module PragmaticSegmenter
     end
 
     def replace_numbers
+      # @text was redefined in replace_abbreviations
       @text.apply @language::Numbers::All
     end
 
