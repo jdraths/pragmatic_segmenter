@@ -97,6 +97,8 @@ module PragmaticSegmenter
 
     def replace_numbers
       # @text was redefined in replace_abbreviations
+      # .apply is a method of the Text class
+      # English::Numbers::All is a set of rules defined in Languages::Common
       @text.apply @language::Numbers::All
     end
 
@@ -109,6 +111,7 @@ module PragmaticSegmenter
     end
 
     def replace_abbreviations
+      # AbbreviationReplacer not a module of english, so use the root module
       @text = abbreviations_replacer.new(text: @text, language: @language).replace
     end
 
