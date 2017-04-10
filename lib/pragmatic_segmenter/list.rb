@@ -43,9 +43,12 @@ module PragmaticSegmenter
 
     attr_reader :text
     def initialize(text:)
+      # Text class is defined as a module of PragmaticSegmenter in types.rb
+      ## suprised the reference works
       @text = Text.new(text)
     end
 
+    # rules are appplied here
     def add_line_break
       format_alphabetical_lists
       format_roman_numeral_lists
