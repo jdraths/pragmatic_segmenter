@@ -18,20 +18,24 @@ module PragmaticSegmenter
 
     # .process is run immediately after processor.new inside of the .segment command
     def process(text:)
-      # List searches for a list within a string and adds newlines before each list item.
-      # see PragmaticSegmenter::List for more...
+      # The following rules are simply REGEX replacements to reformat your text string
+      ## List searches for a list within a string and adds newlines before each list item.
+      ## see PragmaticSegmenter::List for more...
       @text = List.new(text: text).add_line_break
       replace_abbreviations
       replace_numbers
       replace_continuous_punctuation
       @text.apply(@language::Abbreviations::WithMultiplePeriodsAndEmailRule)
       @text.apply(@language::GeoLocationRule)
+      
+      # This where the segmenting occurs
       split_into_segments
     end
 
     private
 
     def split_into_segments
+      # the order we check these segments would be critical
       check_for_parens_between_quotes(@text).split("\r")
          .map! { |segment| segment.apply(@language::SingleNewLineRule, @language::EllipsisRules::All) }
          .map { |segment| check_for_punctuation(segment) }.flatten
